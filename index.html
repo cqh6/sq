@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AES Encrypt/Decrypt</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+</head>
+<body>
+<h2>AES Encrypt/Decrypt Tool</h2>
+
+<label for="inputText">Enter Text:</label>
+<input type="text" id="inputText" placeholder="Enter text here...">
+
+<label for="key">Enter Key:</label>
+<input type="text" id="key" placeholder="Enter 16-byte key here...">
+
+<button onclick="encrypt()">Encrypt</button>
+<button onclick="decrypt()">Decrypt</button>
+
+<p>Result: <span id="result"></span></p>
+
+<script>
+function encrypt() {
+  var inputText = document.getElementById('inputText').value;
+  var key = document.getElementById('key').value;
+  var encrypted = CryptoJS.AES.encrypt(inputText, key).toString();
+  document.getElementById('result').textContent = encrypted;
+}
+
+function decrypt() {
+  var inputText = document.getElementById('inputText').value;
+  var key = document.getElementById('key').value;
+  try {
+    var decrypted = CryptoJS.AES.decrypt(inputText, key).toString(CryptoJS.enc.Utf8);
+    document.getElementById('result').textContent = decrypted;
+  } catch (e) {
+    document.getElementById('result').textContent = 'Invalid key or ciphertext';
+  }
+}
+</script>
+</body>
+</html>
